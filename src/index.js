@@ -11,13 +11,13 @@ const pool = new Pool({
 });
 
 (async function () {
-  await cleansSendgrid();
+  // await cleansSendgrid();
   // await cleansMailgun();
 })();
 
 async function cleansSendgrid() {
   const hooks = `
-    SELECT id, body, body_json
+    SELECT id, headers, body, body_json
     FROM public.webhooks
     where endpoint_id = $1
     order by id;
@@ -39,6 +39,9 @@ async function cleansSendgrid() {
     for (const jsonItem of row.body_json)
       if (jsonItem.email) jsonItem.email = email;
 
+    if (row.headers['Content-Length'])
+      row.headers['Content-Length'] = row.body.length + '';
+
     console.log('');
     console.log('Cleansed:');
     console.log('');
@@ -49,17 +52,18 @@ async function cleansSendgrid() {
         UPDATE webhooks
         SET
           body = $1,
-          body_json = $2
-        WHERE id = $3
+          body_json = $2,
+          headers = $3
+        WHERE id = $4
       `,
-      [row.body, JSON.stringify(row.body_json), row.id],
+      [row.body, JSON.stringify(row.body_json), row.headers, row.id],
     );
   }
 }
 
 async function cleansMailgun() {
   const hooks = `
-    SELECT id, body, body_json
+    SELECT id, headers, body, body_json
     FROM public.webhooks
     where endpoint_id = $1
     order by id;
@@ -106,6 +110,9 @@ async function cleansMailgun() {
     )
       row.body_json['event-data'].recipient = email;
 
+    if (row.headers['Content-Length'])
+      row.headers['Content-Length'] = row.body.length + '';
+
     console.log('');
     console.log('Cleansed:');
     console.log('');
@@ -116,10 +123,11 @@ async function cleansMailgun() {
         UPDATE webhooks
         SET
           body = $1,
-          body_json = $2
-        WHERE id = $3
+          body_json = $2,
+          headers = $3
+        WHERE id = $4
       `,
-      [row.body, JSON.stringify(row.body_json), row.id],
+      [row.body, JSON.stringify(row.body_json), row.headers, row.id],
     );
   }
 }

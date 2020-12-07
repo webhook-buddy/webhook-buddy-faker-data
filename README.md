@@ -2,8 +2,6 @@
 
 Used to replace real email addresses in Sendgrid and Mailgun's webhooks with fake ones so that the database can be shared publicly without exposing email addresses.
 
-Note: Once email addresses are replaced with fake ones, the HTTP-Header `Content-Length` that's stored with the webhook will not be accurate.
-
 ## Debugging in VS Code
 
 Borrowed from: https://github.com/microsoft/vscode-recipes/tree/master/nodemon
