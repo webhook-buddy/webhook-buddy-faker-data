@@ -2,6 +2,12 @@
 
 Used to replace real email addresses in Sendgrid and Mailgun's webhooks with fake ones so that the database can be shared publicly without exposing email addresses.
 
+## Setup
+`npm install`
+
+## Run
+`npm start`
+
 ## Debugging in VS Code
 
 Borrowed from: https://github.com/microsoft/vscode-recipes/tree/master/nodemon
