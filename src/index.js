@@ -47,6 +47,7 @@ async function cleansSendgrid() {
     console.log('');
     console.log(row);
 
+    // Stringify body_json for arrays, otherwise an exception will be thrown: https://github.com/brianc/node-postgres/issues/442
     await pool.query(
       `
         UPDATE webhooks
@@ -118,6 +119,7 @@ async function cleansMailgun() {
     console.log('');
     console.log(row);
 
+    // Stringify is not necessary for body_json here b/c it's an object, but left it in here for consistency with cleansSendgrid()
     await pool.query(
       `
         UPDATE webhooks
