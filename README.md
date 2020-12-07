@@ -1,18 +1,8 @@
-# Simple Node Application
+# Webhook Buddy Faker Data
 
-[![Build Status](https://travis-ci.org/rwieruch/minimal-node-application.svg?branch=master)](https://travis-ci.org/rwieruch/minimal-node-application) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/rwieruch/minimal-node-application.svg)](https://greenkeeper.io/)
+Used to replace real email addresses in Sendgrid and Mailgun's webhooks with fake ones so that the database can be shared publicly without exposing email addresses.
 
-An easy way to get started with JavaScript on the command line. [Read more about it](https://www.robinwieruch.de/minimal-node-js-babel-setup).
-
-[![Edit minimal-react-webpack-babel-setup](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/rwieruch/minimal-node-application/tree/master/?fontsize=14)
-
-## Installation
-
-* `git clone git@github.com:rwieruch/minimal-node-application.git`
-* `cd minimal-node-application`
-* `npm install`
-* `npm start`
-* optional: include *.env* in your *.gitignore*
+Note: Once email addresses are replaced with fake ones, the HTTP-Header `Content-Length` that's stored with the webhook will not be accurate.
 
 ## Debugging in VS Code
 
