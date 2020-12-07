@@ -18,6 +18,8 @@
     "nodemon": "^1.18.9"
   },
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "faker": "^5.1.0",
+    "pg": "^8.5.1"
   }
 }
