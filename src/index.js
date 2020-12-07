@@ -11,7 +11,7 @@ const pool = new Pool({
 });
 
 (async function () {
-  // await cleansSendgrid();
+  await cleansSendgrid();
   // await cleansMailgun();
 })();
 
@@ -19,7 +19,8 @@ async function cleansSendgrid() {
   const hooks = `
     SELECT id, body, body_json
     FROM public.webhooks
-    where endpoint_id = $1;
+    where endpoint_id = $1
+    order by id;
   `;
 
   const { rows } = await pool.query(hooks, [2]);
@@ -60,7 +61,8 @@ async function cleansMailgun() {
   const hooks = `
     SELECT id, body, body_json
     FROM public.webhooks
-    where endpoint_id = $1;
+    where endpoint_id = $1
+    order by id;
   `;
 
   const { rows } = await pool.query(hooks, [27]);
