@@ -30,7 +30,7 @@ async function cleansSendgrid() {
       `----------------------------- NEW ROW: ${row.id}-----------------------------`,
     );
     console.log(row);
-    const email = faker.internet.email();
+    const email = faker.internet.email(null, null, 'example.com');
     row.body = row.body.replace(
       /("email":")(.*?)(")/g,
       `$1${email}$3`,
@@ -77,7 +77,7 @@ async function cleansMailgun() {
       `----------------------------- NEW ROW: ${row.id}-----------------------------`,
     );
     console.log(row);
-    const email = faker.internet.email();
+    const email = faker.internet.email(null, null, 'example.com');
     row.body = [
       row.body,
       'targets',
